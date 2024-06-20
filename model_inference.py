@@ -7,7 +7,7 @@ from model import NNPy
 import tkinter as tk
 
 model = NNPy()
-model.load_state_dict(torch.load("model_state_augmented.pth"))
+model.load_state_dict(torch.load("model_state.pth"))
 model.eval()
 
 transformations = transforms.Compose([
