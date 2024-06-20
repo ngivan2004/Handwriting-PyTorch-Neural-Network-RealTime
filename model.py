@@ -1,8 +1,10 @@
 import torch
 from torch import nn
+from torchvision import transforms
+import torch.nn.functional as F
 
 
-class NN(nn.Module):
+class NNPy(nn.Module):
     def __init__(self):
         # runs superclass constructor
         super().__init__()
@@ -12,7 +14,7 @@ class NN(nn.Module):
         self.flatten = nn.Flatten()
 
         # A sequence of layers
-        """ self.layers = nn.Sequential(
+        self.layers = nn.Sequential(
             # Layer 1, 784 inputs -> 512 outputs
             nn.Linear(28*28, 512),
             # Activation function ReLU
@@ -23,9 +25,9 @@ class NN(nn.Module):
             nn.ReLU(),
             # Final layer, 512 input -> 10 outputs (0 through 9)
             nn.Linear(512, 10),
-        ) """
+        )
 
-        self.layers = nn.Sequential(
+        """ self.layers = nn.Sequential(
             nn.Linear(28*28, 512),
             nn.ReLU(),
             nn.BatchNorm1d(512),
@@ -36,6 +38,7 @@ class NN(nn.Module):
             nn.Dropout(0.2),
             nn.Linear(512, 10),
         )
+ """
 
     def forward(self, x):
         # flatten the input (shape 28, 28) -> (shape 28*28)

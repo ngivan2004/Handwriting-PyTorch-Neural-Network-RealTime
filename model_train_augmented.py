@@ -9,8 +9,8 @@ from model import NNPy
 
 
 learning_rate = 1e-3
-batch_size = 128
-epochs = 20
+batch_size = 256
+epochs = 30
 
 
 # Possibly handy function to use in the future
@@ -24,7 +24,11 @@ def one_hot_encode(y):
 
 transformations = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.1307,), (0.3081,))
+    transforms.Normalize((0.1307,), (0.3081,)),
+    transforms.RandomAffine(degrees=30,
+                            translate=(0.5, 0.5),
+                            scale=(0.25, 1),
+                            shear=(-30, 30, -30, 30))
 ])
 
 # loading the datasets with both training and testing
@@ -102,7 +106,7 @@ def main():
         training_loop(training_dataloader, model, loss_fn, optimizer)
         testing_loop(testing_dataloader, model, loss_fn)
 
-    torch.save(model.state_dict(), 'model_state.pth')
+    torch.save(model.state_dict(), 'model_state_augmented.pth')
 
     print("Done!")
 

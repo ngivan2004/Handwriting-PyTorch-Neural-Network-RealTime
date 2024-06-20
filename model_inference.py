@@ -3,11 +3,11 @@ from torchvision import transforms
 from PIL import Image, ImageDraw, ImageOps
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from model import NN
+from model import NNPy
 import tkinter as tk
 
-model = NN()
-model.load_state_dict(torch.load("model_state.pth"))
+model = NNPy()
+model.load_state_dict(torch.load("model_state_augmented.pth"))
 model.eval()
 
 transformations = transforms.Compose([
