@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Handwriting Recognition</title>
+  </head>
+  <body>
+    <div class="github-link">
+      <a href="https://github.com/ngivan2004" target="_blank">
+        <img src="github-mark.png" alt="GitHub" class="github-icon" />
+        Ivan Ng - ngivan2004
+      </a>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <div class="button" id="clear-button">Clear</div>
+        <div class="divider"></div>
+        <div class="menu-header">Models available:</div>
+        <div class="menu">
+          <div
+            class="menu-item"
+            id="model-1"
+            data-model="onnx_model_augmented+cnn.onnx"
+          >
+            CNN with Data Augmentation
+          </div>
+          <div class="menu-item" id="model-2" data-model="onnx_model.onnx">
+            Basic MLP
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="menu-header">Model Input:</div>
+        <canvas
+          class="canvas elevation"
+          id="preview"
+          width="140"
+          height="140"
+          style="border: 1px solid #000"
+        ></canvas>
+      </div>
+      <div class="main">
+        <h1 class="title">
+          Real-time Neural Network Handwriting Recognition ✍️✨
+        </h1>
+        <div class="content">
+          <div class="left-side">
+            <canvas
+              class="canvas elevation"
+              id="canvas"
+              width="420"
+              height="420"
+            ></canvas>
+          </div>
+          <div class="right-side">
+            <div class="predictions-wrapper">
+              <div class="predictions">
+                <div class="prediction-col" id="prediction-0">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">0</div>
+                </div>
+                <div class="prediction-col" id="prediction-1">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">1</div>
+                </div>
+                <div class="prediction-col" id="prediction-2">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">2</div>
+                </div>
+                <div class="prediction-col" id="prediction-3">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">3</div>
+                </div>
+                <div class="prediction-col" id="prediction-4">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">4</div>
+                </div>
+                <div class="prediction-col" id="prediction-5">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">5</div>
+                </div>
+                <div class="prediction-col" id="prediction-6">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">6</div>
+                </div>
+                <div class="prediction-col" id="prediction-7">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">7</div>
+                </div>
+                <div class="prediction-col" id="prediction-8">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">8</div>
+                </div>
+                <div class="prediction-col" id="prediction-9">
+                  <div class="prediction-bar-container">
+                    <div class="prediction-bar"></div>
+                  </div>
+                  <div class="prediction-number">9</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/onnxjs/dist/onnx.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
