@@ -20,7 +20,7 @@ ctx.lineJoin = "round";
 ctx.font = "42px sans-serif"; // 75% of 56
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
-ctx.fillStyle = "black";
+ctx.fillStyle = "grey"; // Set text color to grey
 ctx.fillText("Loading...", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
 
 ctx.strokeStyle = "black";
@@ -168,10 +168,11 @@ function bodyMouseOut(event) {
 async function loadModel(modelPath) {
   clearCanvas();
   hasIntroText = true; // Reset intro text flag
+  ctx.fillStyle = "grey"; // Set text color to grey
   ctx.fillText("Loading...", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
   await sess.loadModel(modelPath);
   clearCanvas();
-  ctx.fillText("Draw a number here!", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+  ctx.fillText("Draw Number Here", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
 }
 
 document.querySelectorAll(".menu-item").forEach((item) => {
@@ -190,5 +191,6 @@ loadModel(currentModel).then(() => {
   clearButton.addEventListener("mousedown", clearCanvas);
 
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  ctx.fillText("Draw a number here!", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+  ctx.fillStyle = "grey"; // Set text color to grey
+  ctx.fillText("Draw Number Here", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
 });
