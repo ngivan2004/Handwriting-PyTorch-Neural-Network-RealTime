@@ -12,9 +12,8 @@ let isMouseDown = false;
 let hasIntroText = true;
 let lastX = 0;
 let lastY = 0;
-
-const sess = new onnx.InferenceSession();
-const loadingModelPromise = sess.loadModel("./onnx_model_augmented+cnn.onnx");
+let currentModel = "./onnx_model_augmented+cnn.onnx";
+let sess = new onnx.InferenceSession();
 
 ctx.lineWidth = 56;
 ctx.lineJoin = "round";
@@ -164,7 +163,24 @@ function bodyMouseOut(event) {
   }
 }
 
-loadingModelPromise.then(() => {
+async function loadModel(modelPath) {
+  clearCanvas();
+  hasIntroText = true; // Reset intro text flag
+  ctx.fillText("Loading...", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+  await sess.loadModel(modelPath);
+  clearCanvas();
+  ctx.fillText("Draw a number here!", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+}
+
+document.querySelectorAll(".menu-item").forEach((item) => {
+  item.addEventListener("click", async (event) => {
+    currentModel = event.target.getAttribute("data-model");
+    sess = new onnx.InferenceSession(); // Reset session to avoid re-initialization error
+    await loadModel(currentModel);
+  });
+});
+
+loadModel(currentModel).then(() => {
   canvas.addEventListener("mousedown", canvasMouseDown);
   canvas.addEventListener("mousemove", canvasMouseMove);
   document.body.addEventListener("mouseup", bodyMouseUp);
