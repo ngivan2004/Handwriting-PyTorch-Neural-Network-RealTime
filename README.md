@@ -95,7 +95,7 @@ To get started with this project, follow the steps below:
     ```
 
 2. **Install the required libraries:**
-    Make sure you have Python installed, then install the required libraries using `requirements.txt` (currently missing):
+    Make sure you have Python installed, then install the required libraries using `requirements.txt`:
     ```sh
     pip install -r requirements.txt
     ```
