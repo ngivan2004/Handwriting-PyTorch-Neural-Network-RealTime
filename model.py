@@ -47,3 +47,47 @@ class NNPy(nn.Module):
         output = self.layers(x)
 
         return output
+
+
+# this model is a CNN
+class NNPyCNN(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+        self.conv_layers = nn.Sequential(
+            # First convolutional layer: 1 input channel, 32 output channels, 3x3 kernel size
+            nn.Conv2d(in_channels=1, out_channels=32,
+                      kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2),  # Reduce size by half
+
+            # Second convolutional layer: 32 input channels, 64 output channels, 3x3 kernel size
+            nn.Conv2d(in_channels=32, out_channels=64,
+                      kernel_size=3, padding=1),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2)  # Reduce size by half again
+        )
+
+        # Flatten layer
+        self.flatten = nn.Flatten()
+
+        # Fully connected layers
+        self.fc_layers = nn.Sequential(
+            # First fully connected layer: 64*7*7 inputs (from the flattened conv layer output) -> 128 outputs
+            nn.Linear(64 * 7 * 7, 128),
+            nn.ReLU(),
+            nn.Dropout(0.5),  # Add dropout
+
+            # Second fully connected layer: 128 inputs -> 10 outputs
+            nn.Linear(128, 10)
+        )
+
+    def forward(self, x):
+        # Pass through the convolutional layers
+        x = self.conv_layers(x)
+        # Flatten the output from the conv layers
+        x = self.flatten(x)
+        # Pass through the fully connected layers
+        x = self.fc_layers(x)
+
+        return x

@@ -5,15 +5,19 @@ from torchvision import datasets
 from torchvision.transforms import ToTensor, transforms
 import matplotlib.pyplot as plt
 
-from model import NNPy
+from model import NNPyCNN
 
 
 learning_rate = 1e-3
-batch_size = 256
+batch_size = 128
 epochs = 30
 
+# Check if MPS is available
+device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
 
 # Possibly handy function to use in the future
+
+
 def one_hot_encode(y):
     # Create a zero tensor of shape (num_classes,)
     one_hot = torch.zeros(10, dtype=torch.float)
@@ -26,7 +30,7 @@ transformations = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.1307,), (0.3081,)),
     transforms.RandomAffine(degrees=30,
-                            translate=(0.5, 0.5),
+                            translate=(0.2, 0.2),
                             scale=(0.25, 1),
                             shear=(-30, 30, -30, 30))
 ])
@@ -43,48 +47,58 @@ training_dataloader = DataLoader(training_data, batch_size=batch_size)
 testing_dataloader = DataLoader(testing_data, batch_size=batch_size)
 
 
+""" figure = plt.figure(figsize=(8, 8))
+
+sample_idx = torch.randint(len(training_data), size=(1,)).item()
+img, label = training_data[sample_idx]
+
+# Add a single subplot
+ax = figure.add_subplot(1, 1, 1)
+plt.title(label)
+plt.axis("off")
+plt.imshow(img.squeeze(), cmap="gray")
+
+# Overlay pixel values
+img_data = img.squeeze().numpy()
+for y in range(img_data.shape[0]):
+    for x in range(img_data.shape[1]):
+        pixel_value = img_data[y, x]
+        ax.text(x, y, f'{pixel_value:.1f}', color='red',
+                fontsize=6, ha='center', va='center')
+
+# Show the figure
+plt.show()
+ """
+
+
 def training_loop(dataloader, model, loss_fn, optimizer):
-    # size is the total number of samples in the dataset. This helps us calculate the progress later.
     size = len(dataloader.dataset)
-
-    # training mode (layer dropout, batch normalization)
     model.train()
-
     for batch, (one_batch_of_input_data, target_label) in enumerate(dataloader):
+        one_batch_of_input_data, target_label = one_batch_of_input_data.to(
+            device), target_label.to(device)
         prediction = model(one_batch_of_input_data)
         loss = loss_fn(prediction, target_label)
 
-        # does back prop
         loss.backward()
-
-        # Updates the parameters
         optimizer.step()
-
-        # clears gradients to not accumulate.
         optimizer.zero_grad()
 
-        # For ever 100 matches, print progress
         if batch % 100 == 0:
-            # loss.item() returns value of loss.
             loss = loss.item()
-            # current number of samples processed so far
             current = batch * batch_size + len(one_batch_of_input_data)
-
             print(f"loss: {loss:>7f}  [{current:>5d}/{size:>5d}]")
 
 
 def testing_loop(dataloader, model, loss_fn):
-
-    # eval mode
     model.eval()
     size = len(dataloader.dataset)
     batch_num = len(dataloader)
     loss = 0
     correct = 0
-
-    # no grad is used because we want to ensure no gradients will be computed during test mode
     with torch.no_grad():
         for X, y in dataloader:
+            X, y = X.to(device), y.to(device)
             prediction = model(X)
             loss += loss_fn(prediction, y).item()
             correct += (prediction.argmax(1) ==
@@ -97,7 +111,7 @@ def testing_loop(dataloader, model, loss_fn):
 
 
 def main():
-    model = NNPy()
+    model = NNPyCNN().to(device)
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -106,7 +120,7 @@ def main():
         training_loop(training_dataloader, model, loss_fn, optimizer)
         testing_loop(testing_dataloader, model, loss_fn)
 
-    torch.save(model.state_dict(), 'model_state_augmented.pth')
+    torch.save(model.state_dict(), 'model_state_augmented+cnn.pth')
 
     print("Done!")
 

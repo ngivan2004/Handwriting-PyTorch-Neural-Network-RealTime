@@ -14,7 +14,7 @@ let lastX = 0;
 let lastY = 0;
 
 const sess = new onnx.InferenceSession();
-const loadingModelPromise = sess.loadModel("./onnx_model.onnx");
+const loadingModelPromise = sess.loadModel("./onnx_model_augmented+cnn.onnx");
 
 ctx.lineWidth = 56;
 ctx.lineJoin = "round";
