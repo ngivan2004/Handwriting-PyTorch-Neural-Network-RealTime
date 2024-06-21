@@ -175,11 +175,19 @@ async function loadModel(modelPath) {
   ctx.fillText("Draw Number Here", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
 }
 
+function updateModelSelection(currentModelId) {
+  document.querySelectorAll(".menu-item").forEach((item) => {
+    item.classList.remove("active-model");
+  });
+  document.getElementById(currentModelId).classList.add("active-model");
+}
+
 document.querySelectorAll(".menu-item").forEach((item) => {
   item.addEventListener("click", async (event) => {
     currentModel = event.target.getAttribute("data-model");
     sess = new onnx.InferenceSession(); // Reset session to avoid re-initialization error
     await loadModel(currentModel);
+    updateModelSelection(event.target.id);
   });
 });
 
@@ -193,4 +201,5 @@ loadModel(currentModel).then(() => {
   ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   ctx.fillStyle = "grey"; // Set text color to grey
   ctx.fillText("Draw Number Here", CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+  updateModelSelection("model-1");
 });
