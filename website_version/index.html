@@ -10,6 +10,8 @@
     <div class="container">
       <div class="sidebar">
         <div class="button" id="clear-button">Clear</div>
+        <div class="divider"></div>
+        <div class="menu-header">Models available:</div>
         <div class="menu">
           <div
             class="menu-item"
@@ -19,9 +21,11 @@
             CNN with Data Augmentation
           </div>
           <div class="menu-item" id="model-2" data-model="onnx_model.onnx">
-            MLP (Deprecated)
+            Basic MLP
           </div>
         </div>
+        <div class="divider"></div>
+        <div class="menu-header">Model Input:</div>
         <canvas
           class="canvas elevation"
           id="preview"
