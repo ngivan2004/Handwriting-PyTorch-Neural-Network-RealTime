@@ -1,4 +1,4 @@
-const CANVAS_SIZE = 560;
+const CANVAS_SIZE = 420; // 75% of 560
 const PREVIEW_SIZE = 140;
 const CANVAS_SCALE = 1;
 
@@ -15,9 +15,9 @@ let lastY = 0;
 let currentModel = "./onnx_model_augmented+cnn.onnx";
 let sess = new onnx.InferenceSession();
 
-ctx.lineWidth = 56;
+ctx.lineWidth = 42; // 75% of 56
 ctx.lineJoin = "round";
-ctx.font = "56px sans-serif";
+ctx.font = "42px sans-serif"; // 75% of 56
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 ctx.fillStyle = "black";
@@ -64,14 +64,16 @@ async function updatePredictions() {
   for (let y = 0; y < 28; y++) {
     for (let x = 0; x < 28; x++) {
       let total = 0;
-      for (let yy = 0; yy < 20; yy++) {
-        for (let xx = 0; xx < 20; xx++) {
-          const index = 4 * ((y * 20 + yy) * CANVAS_SIZE + (x * 20 + xx));
+      for (let yy = 0; yy < 15; yy++) {
+        // 75% of 20
+        for (let xx = 0; xx < 15; xx++) {
+          // 75% of 20
+          const index = 4 * ((y * 15 + yy) * CANVAS_SIZE + (x * 15 + xx)); // 75% of 20
           const r = imgData.data[index + 3]; // Using the alpha channel for grayscale value
           total += r;
         }
       }
-      const gray = total / (20 * 20 * 255); // Average and normalize to 0-1
+      const gray = total / (15 * 15 * 255); // 75% of 20
 
       floatArray[y * 28 + x] = (gray - mean) / std; // Normalize using mean and std
 
