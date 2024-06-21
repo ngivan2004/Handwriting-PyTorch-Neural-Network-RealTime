@@ -19,3 +19,8 @@ This is a personal project on exploring PyTorch, creating and training my own ne
 
 
 A softMax function is used to generate a probability distribution from 1 through 9 based on the handwriting of the user and it updates in real-time as the user is writing. To begin, install the required libraries on ```requirements.txt``` (currently missing)  and also make sure ```tk``` is working. Run ```model_train.py``` for training, and try the augmented versions too as I have added some transformations to them to make the data more difficult to train on, thereby theoretically producint better outputs. The augmented versions also run on a CNN network instead of an MLP. For inference, run ```model_inference```.
+
+MLP Performance on Standard MNIST Test Data: Tested 10000 inputs, Accuracy: 97.98%
+MLP Performance on Augmented MNIST Test Data: Tested 10000 inputs, Accuracy: 17.49%
+CNN Performance on Standard MNIST Test Data: Tested 10000 inputs, Accuracy: 97.64%
+CNN Performance on Augmented MNIST Test Data: Tested 10000 inputs, Accuracy: 91.27%
