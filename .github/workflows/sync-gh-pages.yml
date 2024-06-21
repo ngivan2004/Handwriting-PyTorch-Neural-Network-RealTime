@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write # This explicitly grants write permissions to the GITHUB_TOKEN
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,7 +24,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git clone --single-branch --branch gh-pages https://github.com/${{ github.repository }} gh-pages
+          git clone --single-branch --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
           rsync -a --exclude='.git' --delete website_version/ gh-pages/
           cd gh-pages
           git add .
