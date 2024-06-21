@@ -18,7 +18,7 @@ This is a personal project on exploring PyTorch, creating and training my own ne
 2. A Convolutional neural network (CNN) trained on augmented MNIST with random rotations, translations, sheers.
 
 
-A softMax function is used to generate a probability distribution from 1 through 9 based on the handwriting of the user and it updates in real-time as the user is writing. To begin, install the required libraries on ```requirements.txt``` (currently missing)  and also make sure ```tk``` is working. Run ```model_train.py``` for training, and try the augmented versions too as I have added some transformations to them to make the data more difficult to train on, thereby theoretically producint better outputs. The augmented versions also run on a CNN network instead of an MLP. For inference, run ```model_inference```.
+A softMax function is used to generate a probability distribution from 0 through 9 based on the handwriting of the user and it updates in real-time as the user is writing. To begin, install the required libraries on ```requirements.txt``` (currently missing)  and also make sure ```tk``` is working. Run ```model_train.py``` for training, and try the augmented versions too as I have added some transformations to them to make the data more difficult to train on, thereby theoretically producint better outputs. The augmented versions also run on a CNN network instead of an MLP. For inference, run ```model_inference```.
 
 | Model | Test Data | Inputs Tested | Accuracy |
 |-------|-----------|---------------|----------|
