@@ -15,7 +15,7 @@ https://github.com/ngivan2004/Handwriting-PyTorch-Neural-Network-RealTime/assets
 I have now implemented both an MLP and a CNN model, and I have also used augmented data in training with rotations, shears, and transformations to increase the complexity of the training data. Both models are now live on the website.
 
 #### Update 1
-I recently discovered Onnxjs, which allows deploying PyTorch models using JavaScript. This inspired me to create a web demo version of my project that runs locally through JavaScript. While I utilized generative AI extensively for the website design, I must credit [Elliot Waite](https://www.youtube.com/@elliotwaite), whose code (particularly for the painting canvas) heavily influenced my work. However, the models used throughout the project are primarily designed, implemented, and trained by me.
+I recently discovered Onnxjs, which allows deploying PyTorch models using JavaScript. This inspired me to create a web demo version of my project that runs locally through JavaScript. While I must admit that I utilized generative AI extensively for the website development, I must credit [Elliot Waite](https://www.youtube.com/@elliotwaite), whose code (particularly for the painting canvas) heavily influenced my work. Note that the models used throughout the project are primarily designed, implemented, and trained by me.
 
 ### Project Overview
 This is a personal project exploring PyTorch, where I created and trained my own neural networks. There are two networks trained:
