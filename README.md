@@ -14,13 +14,16 @@ https://github.com/ngivan2004/Handwriting-PyTorch-Neural-Network-RealTime/assets
 This is a personal project on exploring PyTorch, creating and training my own neural networks. There are 2 networks trained.
 
 
-1. A multilayer perception network (MLP) with 2 hidden layers, and ReLU for activation functions.
-2. A Convolutional neural network (CNN)
+1. A multilayer perception network (MLP) with 2 hidden layers, and ReLU for activation functions trained on standard MNIST.
+2. A Convolutional neural network (CNN) trained on augmented MNIST with random rotations, translations, sheers.
 
 
 A softMax function is used to generate a probability distribution from 1 through 9 based on the handwriting of the user and it updates in real-time as the user is writing. To begin, install the required libraries on ```requirements.txt``` (currently missing)  and also make sure ```tk``` is working. Run ```model_train.py``` for training, and try the augmented versions too as I have added some transformations to them to make the data more difficult to train on, thereby theoretically producint better outputs. The augmented versions also run on a CNN network instead of an MLP. For inference, run ```model_inference```.
 
-MLP Performance on Standard MNIST Test Data: Tested 10000 inputs, Accuracy: 97.98%
-MLP Performance on Augmented MNIST Test Data: Tested 10000 inputs, Accuracy: 17.49%
-CNN Performance on Standard MNIST Test Data: Tested 10000 inputs, Accuracy: 97.64%
-CNN Performance on Augmented MNIST Test Data: Tested 10000 inputs, Accuracy: 91.27%
+| Model | Test Data | Inputs Tested | Accuracy |
+|-------|-----------|---------------|----------|
+| MLP   | Standard MNIST | 10,000        | 97.98%   |
+| MLP   | Augmented MNIST | 10,000        | 17.49%   |
+| CNN   | Standard MNIST | 10,000        | 97.64%   |
+| CNN   | Augmented MNIST | 10,000        | 91.27%   |
+
