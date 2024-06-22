@@ -3,13 +3,10 @@
 ## Live demo: [https://aihandwriting.netlify.app/](https://aihandwriting.netlify.app/)
 
 ### Web Version Inference (Using Onnxjs):
-
-[website.mov](./assets/website.mov)
+https://github.com/ngivan2004/Handwriting-PyTorch-Neural-Network-RealTime/assets/61515871/060e93c1-e78d-4c6e-bf86-0310fdc8d65b
 
 ### Python Version (MatPlotLib):
-
-[python.mov](./assets/website.mov)
-
+https://github.com/ngivan2004/Handwriting-PyTorch-Neural-Network-RealTime/assets/61515871/b1c2a5a9-ba62-4a2c-ba40-ddcc753e53be
 ## Project Updates
 
 ### Update 2
