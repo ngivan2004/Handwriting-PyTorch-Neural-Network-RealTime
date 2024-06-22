@@ -164,7 +164,7 @@ To get started with this project, follow the steps below:
 
 ### Drawing Looks Unusual on iPad
 
-There is an observed issue where strokes do not fully render on iPads, resulting in only a thin line being displayed. Interestingly, this problem does not occur on other touch control devices like mobile phones (which are currently not supported but function marginally as the design is not optimized for mobile). Notably, the issue disappears and the drawing renders properly when the screen is resized.
+There is an observed issue where strokes do not fully render on iPads, resulting in only a thin line being displayed. Interestingly, this problem does not occur on other touch control devices like mobile phones. Notably, the issue disappears and the drawing renders properly when the screen is resized.
 
 - **Impact**: This issue does not affect the actual model performance. The model input remains accurate, as shown in the bottom left-hand corner.
 - **Resolution**: The issue resolves itself when the screen is resized. A fix may be implemented in the future if a solution is found and time permits. Touch control was not the primary focus of this project and was added as an additional feature for fun.
