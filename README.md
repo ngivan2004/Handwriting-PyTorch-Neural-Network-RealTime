@@ -9,21 +9,21 @@ https://github.com/ngivan2004/Handwriting-PyTorch-Neural-Network-RealTime/assets
 ### Python Version (MatPlotLib):
 https://github.com/ngivan2004/Handwriting-PyTorch-Neural-Network-RealTime/assets/61515871/a0eb1096-b779-4001-a433-1820c16621af
 
-### Project Updates
+## Project Updates
 
-#### Update 2
+### Update 2
 I have now implemented both an MLP and a CNN model, and I have also used augmented data in training with rotations, shears, and transformations to increase the complexity of the training data. Both models are now live on the website.
 
-#### Update 1
+### Update 1
 I recently discovered Onnxjs, which allows deploying PyTorch models using JavaScript. This inspired me to create a web demo version of my project that runs locally through JavaScript. While I must admit that I utilized generative AI extensively for the website development, I must credit [Elliot Waite](https://www.youtube.com/@elliotwaite), whose code (particularly for the painting canvas) heavily influenced my work. Note that the models used throughout the project are primarily designed, implemented, and trained by me.
 
-### Project Overview
+## Project Overview
 This is a personal project exploring PyTorch, where I created and trained my own neural networks. There are two networks trained:
 
 1. A Multilayer Perceptron (MLP) network trained on standard MNIST.
 2. A Convolutional Neural Network (CNN) trained on augmented MNIST with random rotations, translations, and shears.
 
-#### MLP Model
+### MLP Model
 The MLP model is defined as follows:
 
 - **Flatten Layer**: Converts the 28x28 image into a 1D tensor with 784 elements.
@@ -31,7 +31,7 @@ The MLP model is defined as follows:
 - **Second Fully Connected Layer**: 512 inputs to 512 outputs, followed by a ReLU activation function.
 - **Output Layer**: 512 inputs to 10 outputs (one for each digit).
 
-#### CNN Model
+### CNN Model
 The CNN model is defined as follows:
 
 - **First Convolutional Layer**: 1 input channel, 32 output channels, 3x3 kernel size, followed by ReLU activation and max pooling (2x2).
@@ -49,7 +49,28 @@ The CNN model is defined as follows:
 
 A softmax function is used to generate a probability distribution from 0 through 9 based on the user's handwriting, updating in real-time as the user writes.
 
-### Repository Structure
+### A Note on Data Augmentation
+
+Data augmentation is a technique used to increase the diversity of your training dataset without actually collecting new data. It involves applying random transformations to your existing data, which helps to prevent overfitting and improves the model's generalization capabilities.
+
+In the context of our handwriting recognition project, we apply several transformations to the MNIST dataset, including random rotations, translations, scaling, and shearing. These transformations simulate different writing styles and conditions, making the model more robust when it encounters varied handwriting samples.
+
+Below are two grids for comparison:
+
+- The first grid shows original images from the MNIST dataset.
+- The second grid shows the same images after data augmentation has been applied.
+
+<p align="center">
+    <img src="https://github.com/ngivan2004/Handwriting-PyTorch-Neural-Network-RealTime/assets/61515871/bfa8a851-9f57-495f-8d4d-7a8c1f59a3b4" alt="Original Images" width="45%">
+    <img src="https://github.com/ngivan2004/Handwriting-PyTorch-Neural-Network-RealTime/assets/61515871/bc2e4ed2-201f-40d2-ab69-87807d24ba82" alt="Augmented Images" width="45%">
+</p>
+
+By comparing these grids, you can see how the augmentations introduce variations while retaining the essential characteristics of the original digits. This enhanced dataset allows the model to learn from a broader range of examples, leading to better performance on unseen data.
+
+
+
+
+## Repository Structure
 Here's an overview of the repository structure:
 
 - **website_version/**: Contains the web version of the project.
@@ -84,7 +105,11 @@ Here's an overview of the repository structure:
 
 - **README.md**: This readme file.
 
-### Getting Started
+- **requirements.txt**: The libraries needed for this project.
+
+- **sample_photo_grid.py**: Generates grids of sample training data of MNIST, both standard and augmented with transformations.
+
+## Getting Started
 
 To get started with this project, follow the steps below:
 
