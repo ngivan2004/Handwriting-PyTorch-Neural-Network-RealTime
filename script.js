@@ -191,6 +191,45 @@ document.querySelectorAll(".menu-item").forEach((item) => {
   });
 });
 
+function getTouchPos(canvas, touchEvent) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (touchEvent.touches[0].clientX - rect.left) / CANVAS_SCALE,
+    y: (touchEvent.touches[0].clientY - rect.top) / CANVAS_SCALE,
+  };
+}
+
+function touchStart(event) {
+  isMouseDown = true;
+  if (hasIntroText) {
+    clearCanvas();
+    hasIntroText = false;
+  }
+  const touchPos = getTouchPos(canvas, event);
+  lastX = touchPos.x + 0.001;
+  lastY = touchPos.y + 0.001;
+  touchMove(event);
+  event.preventDefault();
+}
+
+function touchMove(event) {
+  const touchPos = getTouchPos(canvas, event);
+  if (isMouseDown) {
+    drawLine(lastX, lastY, touchPos.x, touchPos.y);
+  }
+  lastX = touchPos.x;
+  lastY = touchPos.y;
+  event.preventDefault();
+}
+
+function touchEnd() {
+  isMouseDown = false;
+}
+
+canvas.addEventListener("touchstart", touchStart, false);
+canvas.addEventListener("touchmove", touchMove, false);
+canvas.addEventListener("touchend", touchEnd, false);
+
 loadModel(currentModel).then(() => {
   canvas.addEventListener("mousedown", canvasMouseDown);
   canvas.addEventListener("mousemove", canvasMouseMove);
