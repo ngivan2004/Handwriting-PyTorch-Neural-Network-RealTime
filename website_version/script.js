@@ -61,23 +61,25 @@ async function updatePredictions() {
   const mean = 0.1307;
   const std = 0.3081;
 
+  const step = CANVAS_SIZE / 28; // Size of each bin
+
   for (let y = 0; y < 28; y++) {
     for (let x = 0; x < 28; x++) {
       let total = 0;
-      for (let yy = 0; yy < 15; yy++) {
-        // 75% of 20
-        for (let xx = 0; xx < 15; xx++) {
-          // 75% of 20
-          const index = 4 * ((y * 15 + yy) * CANVAS_SIZE + (x * 15 + xx)); // 75% of 20
+      for (let yy = 0; yy < step; yy++) {
+        for (let xx = 0; xx < step; xx++) {
+          const index =
+            4 *
+            ((Math.floor(y * step) + yy) * CANVAS_SIZE +
+              (Math.floor(x * step) + xx));
           const r = imgData.data[index + 3]; // Using the alpha channel for grayscale value
           total += r;
         }
       }
-      const gray = total / (15 * 15 * 255); // 75% of 20
+      const gray = total / (step * step * 255);
 
       floatArray[y * 28 + x] = (gray - mean) / std; // Normalize using mean and std
 
-      // Set preview image data for debugging
       const previewIndex = 4 * (y * 28 + x);
       previewImageData.data[previewIndex] = gray * 255;
       previewImageData.data[previewIndex + 1] = gray * 255;
@@ -137,22 +139,30 @@ function canvasMouseDown(event) {
     clearCanvas();
     hasIntroText = false;
   }
-  const x = event.offsetX / CANVAS_SCALE;
-  const y = event.offsetY / CANVAS_SCALE;
-
+  const { x, y } = getCanvasCoordinates(event);
   lastX = x + 0.001;
   lastY = y + 0.001;
   canvasMouseMove(event);
 }
 
 function canvasMouseMove(event) {
-  const x = event.offsetX / CANVAS_SCALE;
-  const y = event.offsetY / CANVAS_SCALE;
+  const { x, y } = getCanvasCoordinates(event);
   if (isMouseDown) {
     drawLine(lastX, lastY, x, y);
   }
   lastX = x;
   lastY = y;
+}
+
+function getCanvasCoordinates(event) {
+  const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+
+  const x = (event.clientX - rect.left) * scaleX;
+  const y = (event.clientY - rect.top) * scaleY;
+
+  return { x, y };
 }
 
 function bodyMouseUp() {
@@ -193,9 +203,12 @@ document.querySelectorAll(".menu-item").forEach((item) => {
 
 function getTouchPos(canvas, touchEvent) {
   const rect = canvas.getBoundingClientRect();
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
+
   return {
-    x: (touchEvent.touches[0].clientX - rect.left) / CANVAS_SCALE,
-    y: (touchEvent.touches[0].clientY - rect.top) / CANVAS_SCALE,
+    x: (touchEvent.touches[0].clientX - rect.left) * scaleX,
+    y: (touchEvent.touches[0].clientY - rect.top) * scaleY,
   };
 }
 
