@@ -8,6 +8,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  height: 100%; /* Ensure html covers full height */
 }
 
 body {
@@ -15,10 +16,11 @@ body {
   background: #f2f2f2; /* Slight grey tint */
   color: #212121;
   display: flex;
+  flex-direction: column; /* Changed to column for better alignment */
   font-family: "Roboto", sans-serif;
   justify-content: center;
   margin: 0;
-  height: 100vh;
+  min-height: 100vh; /* Ensure body covers full viewport height */
 }
 
 .github-link {
@@ -53,7 +55,8 @@ body {
 
 .container {
   display: flex;
-  height: 100%;
+  flex: 1; /* Ensure the container takes up the remaining space */
+  height: 100%; /* Ensure container covers full height */
   width: 100%;
 }
 
@@ -187,7 +190,6 @@ body {
 
 .predictions-wrapper {
   width: 100%;
-  overflow-x: auto;
 }
 
 .predictions {
@@ -202,7 +204,8 @@ body {
 
 .prediction-bar-container {
   background: #e0e0e0;
-  height: 390px;
+  height: calc(100vh - 320px); /* Dynamic height calculation */
+  max-height: 420px; /* Max height */
   width: 20px;
   border-radius: 10px;
   overflow: hidden;
@@ -268,7 +271,7 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1089px) {
   .title {
     font-size: 24px;
   }
@@ -295,11 +298,21 @@ body {
   }
 
   .predictions-wrapper {
-    width: 90%;
+    width: 100%;
   }
 
   .predictions {
-    gap: 5px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .prediction-bar-container {
+    width: calc(100% / 10 - 10px);
+    min-width: 15px;
+    height: calc(
+      50vh - 320px
+    ); /* Dynamic height calculation for smaller screens */
+    max-height: 420px; /* Max height */
   }
 }
 
