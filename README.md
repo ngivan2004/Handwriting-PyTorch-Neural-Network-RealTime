@@ -159,3 +159,12 @@ To get started with this project, follow the steps below:
    This will start a local server at `http://localhost:8000`. Open your web browser and navigate to `http://localhost:8000/index.html` to view the demo.
 
    **Note:** If you have trained your own models and converted them into ONNX using the provided training and conversion scripts, and want to use them instead of the pre-trained models, make sure to move the converted ONNX models into the `website_version` folder before running the demo.
+
+## Known Issues
+
+### Drawing Looks Unusual on iPad
+
+There is an observed issue where strokes do not fully render on iPads, resulting in only a thin line being displayed. Interestingly, this problem does not occur on other touch control devices like mobile phones (which are currently not supported but function marginally as the design is not optimized for mobile). Notably, the issue disappears and the drawing renders properly when the screen is resized.
+
+- **Impact**: This issue does not affect the actual model performance. The model input remains accurate, as shown in the bottom left-hand corner.
+- **Resolution**: The issue resolves itself when the screen is resized. A fix may be implemented in the future if a solution is found and time permits. Touch control was not the primary focus of this project and was added as an additional feature for fun.
